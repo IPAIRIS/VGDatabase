@@ -30,7 +30,7 @@ exports.getFromUid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM review R, game G, Player P WHERE R.UID = " + req.params.uid + " AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM review R, game G, player P WHERE R.UID = " + req.params.uid + " AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -66,7 +66,7 @@ exports.getFromUsername = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM review R, game G, Player P WHERE P.Username LIKE '%" + req.params.username + "%' AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM review R, game G, player P WHERE P.Username LIKE '%" + req.params.username + "%' AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -102,7 +102,7 @@ exports.getFromGid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM review R, game G, Player P WHERE G.GID = " + req.params.gid + " AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM review R, game G, player P WHERE G.GID = " + req.params.gid + " AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -138,7 +138,7 @@ exports.getFromGameTitle = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM review R, game G, Player P WHERE G.Title LIKE '%" + req.params.title + "%' AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM review R, game G, player P WHERE G.Title LIKE '%" + req.params.title + "%' AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -174,7 +174,7 @@ exports.getAll = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM review R, game G, Player P WHERE R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM review R, game G, player P WHERE R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
