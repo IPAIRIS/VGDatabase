@@ -4,8 +4,11 @@ const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
 var Q 			= require('q');
+var cors = require('cors');
 
 const app = express();
+
+app.use(cors());
 
 // Parsers for POST data
 app.use(bodyParser.json());
