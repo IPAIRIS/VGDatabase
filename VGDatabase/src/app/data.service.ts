@@ -67,11 +67,11 @@ export class DataService {
 	}
 
   	getAllPlayers() {
-		return this.http.get("http://104.198.184.180/api/players/all").map(result => this.result = result.json().data);
+		return this.http.get("http://104.198.184.180:8080/api/players/all").map(result => this.result = result.json().data);
 	}	
 
 	insertPlayer(player: any) {
-		return this.hClient.post('http://104.198.184.180/api/players/insert', player).subscribe();
+		return this.hClient.post('http://104.198.184.180:8080/api/players/insert', player).subscribe();
 	}		
 
 	// Developers
