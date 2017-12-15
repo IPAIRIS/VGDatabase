@@ -63,7 +63,7 @@ export class DataService {
 	}
 
   	getPlayerFromEmail(email: string) {
-		return this.http.get("http://localhost:8080/api/players/email/" + email).map(result => this.result = result.json().data);
+	return this.http.get("http://104.198.184.180:8080/api/players/email/" + email).map(result => this.result = result.json().data);
 	}
 
   	getAllPlayers() {
