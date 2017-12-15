@@ -238,7 +238,7 @@ export class SearchComponent implements OnInit {
       if (this.player)
       {
         this.columnOptions = ["UID", "Username"];
-        this.columnHeaders = ["UID", "Username"];
+        this.columnHeaders = ["UID", "Username", "First Name", "Last Name"];
       }
       else
       {
@@ -251,12 +251,12 @@ export class SearchComponent implements OnInit {
       if (this.player)
       {
         this.columnOptions = ["UID", "Name"];
-        this.columnHeaders = ["UID", "Name"];
+        this.columnHeaders = ["UID", "First Name","Company Name", "Description"];
       }
       else
       {
         this.columnOptions = ["UID", "Username"];
-        this.columnHeaders = ["UID", "Username"];
+        this.columnHeaders = ["UID", "Username", "First Name", "Last Name"];
       }
     }
     else if (obj.id == 3) 
@@ -269,7 +269,7 @@ export class SearchComponent implements OnInit {
       else
       {
         this.columnOptions = ["UID", "Name"];
-        this.columnHeaders = ["UID", "Name"];
+        this.columnHeaders = ["UID", "First Name","Company Name", "Description"];
       }
     }
     else if (obj.id == 4) 
@@ -277,12 +277,12 @@ export class SearchComponent implements OnInit {
       if (this.player)
       {
         this.columnOptions = ["UID", "Username", "GID", "Game Title"];
-        this.columnHeaders = ["UID", "Username", "Game Title", "Rating"];
+        this.columnHeaders = ["Username", "Game Title", "Review Title", "Body", "Stars"];
       }
       else
       {
         this.columnOptions = ["UID", "GID"];
-        this.columnHeaders = ["UID", "GID"];
+        this.columnHeaders = ["UID", "GID", "First Name", "Last Name", "Game Title"];
       }
     }
     else if (obj.id == 5) 
@@ -305,7 +305,7 @@ export class SearchComponent implements OnInit {
       else
       {
         this.columnOptions = ["UID", "Username", "GID", "Game Title"];
-        this.columnHeaders = ["UID", "Username", "Game Title", "Rating"];
+        this.columnHeaders = ["Username", "Game Title", "Review Title", "Body", "Stars"];
       }
     }    
     else if (obj.id == 7)

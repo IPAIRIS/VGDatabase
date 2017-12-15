@@ -21,10 +21,11 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let review of reviews | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
-						<td>{{ review.UID }}</td>
-						<td>{{ review.Username }}</td>
-						<td>{{ review.Title }}</td>
-						<td>{{ review.Stars }}</td>
+							<td>{{ result.Username }}</td>
+							<td>{{ result.gTitle }}</td>
+							<td>{{ result.rTitle }}</td>
+							<td>{{ result.Body }}</td>
+							<td>{{ result.Stars }}</td>
 					</tr>
 				</tbody>
 			</table>

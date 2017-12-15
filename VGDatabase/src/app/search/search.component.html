@@ -54,6 +54,8 @@
 						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
 							<td>{{ result.UID }}</td>
 							<td>{{ result.Username }}</td>
+							<td>{{ result.FirstName }}</td>
+							<td>{{ result.LastName }}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -68,7 +70,9 @@
 				 	<tbody>
 						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
 							<td>{{ result.UID }}</td>
+							<td>{{ result.FirstName }}</td>
 							<td>{{ result.Name }}</td>
+							<td>{{ result.Description }}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -84,6 +88,9 @@
 						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
 							<td>{{ result.UID }}</td>
 							<td>{{ result.GID }}</td>
+							<td>{{ result.FirstName }}</td>
+							<td>{{ result.LastName }}</td>
+							<td>{{ result.Title }}</td>
 						</tr>
 					</tbody>
 				</table>
@@ -113,10 +120,11 @@
 					</thead>
 				 	<tbody>
 						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
-							<td>{{ result.UID }}</td>
 							<td>{{ result.Username }}</td>
-							<td>{{ result.Title }}</td>
-							<td>{{ result.Rating }}</td>
+							<td>{{ result.gTitle }}</td>
+							<td>{{ result.rTitle }}</td>
+							<td>{{ result.Body }}</td>
+							<td>{{ result.Stars }}</td>
 						</tr>
 					</tbody>
 				</table>

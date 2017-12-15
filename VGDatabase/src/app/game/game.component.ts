@@ -18,7 +18,7 @@ export class GameComponent implements OnInit {
     totalPages: number = 0;
 	currentPage: number = 0;
 	pageSize: number = 5;	
-	private columnHeaders = ["UID", "Username", "Game Title", "Stars"];
+	private columnHeaders = ["Username", "Game Title", "Review Title", "Body", "Stars"];
 
   constructor(private dataService: DataService,
   				private router: Router,

@@ -100,7 +100,7 @@ export class BrowseComponent implements OnInit {
     {
       if (this.player)
       {
-        this.columnHeaders = ["UID", "Username"];
+        this.columnHeaders = ["UID", "Username", "First Name", "Last Name"];
         this.dataService.getAllPlayers().subscribe( res => {
                   this.getResult(res);
                   this.table = 'Player';
@@ -119,7 +119,7 @@ export class BrowseComponent implements OnInit {
     {
       if (this.player)
       {
-        this.columnHeaders = ["UID", "Name"];
+        this.columnHeaders = ["UID", "First Name","Company Name", "Description"];
         this.dataService.getAllDevelopers().subscribe( res => {
                   this.getResult(res);
                   this.table = 'Developer';
@@ -127,7 +127,7 @@ export class BrowseComponent implements OnInit {
       }
       else
       {
-        this.columnHeaders = ["UID", "Username"];
+        this.columnHeaders = ["UID", "Username", "First Name", "Last Name"];
         this.dataService.getAllPlayers().subscribe( res => {
                   this.getResult(res);
                   this.table = 'Player';
@@ -146,7 +146,7 @@ export class BrowseComponent implements OnInit {
       }
       else
       {
-        this.columnHeaders = ["UID", "Name"];
+        this.columnHeaders = ["UID", "First Name","Company Name", "Description"];
         this.dataService.getAllDevelopers().subscribe( res => {
                   this.getResult(res);
                   this.table = 'Developer';
@@ -157,7 +157,7 @@ export class BrowseComponent implements OnInit {
     {
       if (this.player)
       {
-        this.columnHeaders = ["UID", "Username", "Game Title", "Rating"];
+        this.columnHeaders = ["Username", "Game Title", "Review Title", "Body", "Stars"];
         this.dataService.getAllReviews().subscribe( res => {
                   this.getResult(res);
                   this.table = 'Review';
@@ -165,7 +165,7 @@ export class BrowseComponent implements OnInit {
       }
       else
       {
-        this.columnHeaders = ["UID", "GID"];
+        this.columnHeaders = ["UID", "GID", "First Name", "Last Name", "Game Title"];
         this.dataService.getAllModerators().subscribe( res => {
                   this.getResult(res);
                   this.table = 'Moderator';
@@ -197,7 +197,7 @@ export class BrowseComponent implements OnInit {
       {}
       else
       {
-        this.columnHeaders = ["UID", "Username", "Game Title", "Rating"];
+        this.columnHeaders = ["Username", "Game Title", "Review Title", "Body", "Stars"];
         this.dataService.getAllReviews().subscribe( res => {
                   this.getResult(res);
                   this.table = 'Review';
