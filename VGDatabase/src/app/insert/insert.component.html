@@ -1,0 +1,228 @@
+<br>
+<div *ngIf="loggedIn;then isLoggedIn else notLoggedIn"></div>
+<ng-template #isLoggedIn>
+	<div *ngIf="moderator;then isModerator else notModerator"></div>
+</ng-template>
+<ng-template #notModerator>Need To be logged in as moderator</ng-template>
+<ng-template #notLoggedIn>Need To be logged in as moderator</ng-template>
+	
+<ng-template #isModerator>
+	<div class="container">
+	  <div class="row justify-content-md-center">
+	  	<label for="tSelect" class="col-2 col-form-label">Insert Into:</label>
+	    <div class="col-5">
+			<select class="form-control" id="tSelect" name="tableSelect" (change)="tableDropDownChanged($event.target.selectedIndex)">
+				<option *ngFor="let op of tableOptions">{{ op.val }}</option>
+			</select>
+	    </div>
+	  </div>
+	  <br>
+	  <div [ngSwitch]="table">
+	  	<form [formGroup]="userForm" (ngSubmit)="userSubmit(userForm.value)" *ngSwitchCase="'User'">
+			<div class="form-container">
+				<div class="form-group">
+					<label>Email
+						<input type="email" formControlName="Email">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>First Name
+						<input type="text" formControlName="FirstName">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Last Name
+						<input type="text" formControlName="LastName">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Password
+						<input type="password" formControlName="Password">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label for="accType">Account Type
+						<select class="form-control" id="accType" name="accType" formControlName="accountType" (change)="accDDChange($event.target.selectedIndex)">
+							<option *ngFor="let op of accTypeOptions">{{ op.val }}</option>
+						</select>
+					</label> 
+				</div>
+				<div [ngSwitch]="aType">
+					<div *ngSwitchCase="'Player'">
+						<div class="form-group">
+							<label>Username
+								<input type="text" formControlName="Username">
+							</label> 
+						</div>
+					</div>
+					<div *ngSwitchCase="'Developer'">
+						<div class="form-group">
+							<label>Developer Name
+								<input type="text" formControlName="Name">
+							</label>
+						</div>
+						<div class="form-group">
+							<label>Developer Description
+								<input type="text" formControlName="Description">
+							</label>
+						</div>
+						<div class="form-group">
+							<label>Founded Date
+								<input type="date" formControlName="Founded">
+							</label>
+						</div>										
+					</div>
+					<div *ngSwitchCase="'Moderator'">
+						<div class="form-group">
+							<label>GID (must exist in database)
+								<input type="number" formControlName="GID" min="0">
+							</label>
+						</div>						
+					</div>
+				</div>
+				<input type="submit" class="btn-default btn" value="Insert" [disabled]="!userForm.valid">
+			</div>
+	  	</form>
+	  	<form [formGroup]="gameForm" (ngSubmit)="gameSubmit(gameForm.value)" *ngSwitchCase="'Game'">
+			<div class="form-container">
+				<div class="form-group">
+					<label>Title
+						<input type="text" formControlName="Title">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Developer UID (must exist in databse)
+						<input type="number" formControlName="UID" min="0">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Release Date
+						<input type="date" formControlName="ReleaseDate">
+					</label>
+				</div>
+				<div class="form-group">
+					<label>Description
+						<input type="text" formControlName="Description">
+					</label>			
+				</div>			
+				<div class="form-group">
+					<label>Price
+						<input type="number"  min="0" formControlName="Price">
+					</label>			
+				</div>
+				<input type="submit" class="btn-default btn" value="Insert" [disabled]="!gameForm.valid">
+			</div>
+	  	</form>
+	  	<form [formGroup]="reviewForm" (ngSubmit)="reviewSubmit(reviewForm.value)" *ngSwitchCase="'Review'">
+			<div class="form-container">
+				<div class="form-group">
+					<label>Player UID (must exist in databse)
+						<input type="number" formControlName="UID" min="0">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Game GID (must exist in databse)
+						<input type="number" formControlName="GID" min="0">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Stars
+						<select class="form-control" id="rating" name="rating" formControlName="Stars">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>												
+						</select>
+					</label> 
+				</div>		
+				<div class="form-group">
+					<label>Title
+						<input type="text" formControlName="Title">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Body
+						<input type="text" formControlName="Body">
+					</label>			
+				</div>
+				<input type="submit" class="btn-default btn" value="Insert" [disabled]="!reviewForm.valid">
+			</div>
+	  	</form>
+	  	<form [formGroup]="purchaseForm" (ngSubmit)="purchaseSubmit(purchaseForm.value)" *ngSwitchCase="'Purchase'">
+			<div class="form-container">
+				<div class="form-group">
+					<label>Player UID (must exist in databse)
+						<input type="number" formControlName="UID" min="0">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Game GID (must exist in databse)
+						<input type="number" formControlName="GID" min="0">
+					</label>			
+				</div>
+				<input type="submit" class="btn-default btn" value="Insert" [disabled]="!purchaseForm.valid">
+			</div>
+	  	</form>
+	  	<form [formGroup]="achievementForm" (ngSubmit)="achievementSubmit(achievementForm.value)" *ngSwitchCase="'Achievement'">
+			<div class="form-container">
+				<div class="form-group">
+					<label>Game GID (must exist in databse)
+						<input type="number" formControlName="GID" min="0">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Achievement Number (must not already exist for game)
+						<input type="number" formControlName="Number" min="0">
+					</label>			
+				</div>	
+				<div class="form-group">
+					<label>Points
+						<input type="number" formControlName="Points" min="0">
+					</label>			
+				</div>						
+				<div class="form-group">
+					<label>Title
+						<input type="text" formControlName="Title">
+					</label>			
+				</div>
+				<div class="form-group">
+					<label>Description
+						<input type="text" formControlName="Description">
+					</label>			
+				</div>			
+				<input type="submit" class="btn-default btn" value="Insert" [disabled]="!achievementForm.valid">
+			</div>
+	  	</form>  		
+	  </div>
+	</div>
+	<br>
+	<div class="alert alert-danger alert-dismissable" *ngIf="emailAlreadyExists == true" >
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Email Already Exists!</strong> the email entered already exists. Enter a different email
+	</div>
+	<div class="alert alert-danger alert-dismissable" *ngIf="developerNameAlreadyExists == true" >
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Developer Name Already Exists!</strong> the developer Name entered already exists. Enter a different name
+	</div>
+	<div class="alert alert-danger alert-dismissable" *ngIf="usernameAlreadyExists == true" >
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Username Already Exists!</strong> the username entered already exists. Enter a different username
+	</div>
+	<div class="alert alert-danger alert-dismissable" *ngIf="developerDoesNotExist == true" >
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Developer Doesn't Exist</strong> the developer entered doesn't exist. Enter a valid developer UID
+	</div>
+	<div class="alert alert-danger alert-dismissable" *ngIf="playerDoesNotExist == true" >
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Player Doesn't Exist</strong> the player entered doesn't exist. Enter a valid player UID
+	</div>
+	<div class="alert alert-danger alert-dismissable" *ngIf="gameDoesNotExist == true" >
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Game Doesn't Exist</strong> the game entered doesn't exist. Enter a valid game GID
+	</div>
+	<div class="alert alert-danger alert-dismissable" *ngIf="numberForGameAlreadyExists == true" >
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		<strong>Achievement number already exists</strong> Achievement number for the game GID entered already exists. Please enter a different number
+	</div>
+</ng-template>

@@ -1,0 +1,66 @@
+<br>
+<div *ngIf="loggedIn;then isLoggedIn else notLoggedIn"></div>
+<ng-template #isLoggedIn>
+	<div *ngIf="moderator;then isModerator else notModerator"></div>
+</ng-template>
+<ng-template #notModerator>Need To be logged in as moderator</ng-template>
+<ng-template #notLoggedIn>Need To be logged in as moderator</ng-template>
+
+<ng-template #isModerator>
+	<div class="container">  
+	    <form #form = "ngForm" (ngSubmit)="logForm(form.value)" enctype="multipart/form-data">  
+	        <div class="form-group">  
+	            <label>File</label>  
+	            <input type="file" name="myfile" ngModel  (change)="getFiles($event)">  
+	        </div> 
+	        <div class="form-group" *ngIf="fileNotLoaded == true">
+				<div class="alert alert-danger alert-dismissable">
+					<strong>Please Choose a File</strong> Choose a file with a .json extension
+				</div>        	
+	        </div> 
+	        <div class="form-group" *ngIf="jsonNotEntered == true">
+				<div class="alert alert-danger alert-dismissable">
+					<strong>Filetype not json</strong> Choose a file with a .json extension
+				</div>        	
+	        </div>        
+	        <div class="form-group" *ngIf="errorParsingJson == true">
+				<div class="alert alert-danger alert-dismissable">
+					<strong>Error parsing json file</strong> there was an error when parsing the json file. Make sure it is in the correct format
+				</div>        	
+	        </div>   
+	        <div class="form-group" *ngIf="duplicateEmails == true">
+				<div class="alert alert-danger alert-dismissable">
+					<strong>Duplicate Emails</strong> Your Json file has one or more users with the same email. Enter unique email for each user
+				</div>        	
+	        </div>      
+	        <div class="form-group" *ngIf="duplicateUsernames == true">
+				<div class="alert alert-danger alert-dismissable">
+					<strong>Duplicate Usernames</strong> Your Json file has one or more players with the same username. Enter unique username for each user
+				</div>        	
+	        </div>  
+	        <div class="form-group" *ngIf="duplicateReviews == true">
+				<div class="alert alert-danger alert-dismissable">
+					<strong>Duplicate Reviews</strong> Your Json file has one or more reviews with the same uid/gid pair. Enter unique uid/gid pair for each review
+				</div>        	
+	        </div>  
+	        <div class="form-group" *ngIf="duplicatePurchases == true">
+				<div class="alert alert-danger alert-dismissable">
+					<strong>Duplicate Purchases</strong> Your Json file has one or more purchases with the same uid/gid pair. Enter unique uid/gid pair for each purchase
+				</div>        	
+	        </div>  
+	        <div class="form-group" *ngIf="duplicateAchievements == true">
+				<div class="alert alert-danger alert-dismissable">
+					<strong>Duplicate Achievements</strong> Your Json file has one or more achievements with the same number/gid pair. Enter unique number/gid pair for each user
+				</div>        	
+	        </div>    
+	        <div class="form-group" *ngIf="uploading == true">
+				<div class="alert alert-info alert-dismissable">
+					<strong>Uploading...</strong> Your Json file is being uploaded to the database
+				</div>        	
+	        </div>                                                  
+	        <div class="form-group">
+				<button type="submit" class="btn btn-primary">SUBMIT</button>      	
+	        </div>
+	    </form>  
+	</div> 
+</ng-template>	

@@ -1,0 +1,39 @@
+<br>
+<div *ngIf="loggedIn;then isLoggedIn else notLoggedIn"></div>
+<ng-template #notLoggedIn>Need To be logged in to View Games</ng-template>
+
+<ng-template #isLoggedIn>
+	<div class="container">
+		<h1>{{ gameInfo[0].Title }}</h1>
+		<br>
+		<h2>Reviews</h2>
+		<br>
+		<div *ngIf="hasReviews == true;then noReviews else hasReviews"></div>
+		<ng-template #noReviews>
+			<h4>No Reviews for this game</h4>
+		</ng-template>
+		<ng-template #hasReviews>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th scope="col" *ngFor='let col of columnHeaders'>{{ col }}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let review of reviews | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+						<td>{{ review.UID }}</td>
+						<td>{{ review.Username }}</td>
+						<td>{{ review.Title }}</td>
+						<td>{{ review.Stars }}</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="row justify-content-md-center">
+				<ng-container *ngIf="totalPages > 0">
+					<button type="button" class="btn-default btn" *ngIf="currentPage > 1" (click)="prevPage()">Prev</button>
+					<button type="button" class="btn-default btn" *ngIf="currentPage < totalPages" (click)="nextPage()">Next</button>
+				</ng-container>	
+			</div>			
+		</ng-template>
+	</div>
+</ng-template>

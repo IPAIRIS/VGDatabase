@@ -1,0 +1,156 @@
+<br>
+<div *ngIf="loggedIn;then isLoggedIn else notLoggedIn"></div>
+<ng-template #notLoggedIn>Need To be logged in to browse</ng-template>
+
+<ng-template #isLoggedIn>
+	<div class="container">
+		<div class="row justify-content-md-center">
+		  	<label for="tSelect" class="col-2 col-form-label">Browse:</label>
+		    <div class="col-5">
+				<select class="form-control" id="tSelect" name="tableSelect" (change)="tableDropDownChanged($event.target.selectedIndex)">
+					<option *ngFor="let op of tableOptions">{{ op.val }}</option>
+				</select>
+		    </div>		
+		</div>
+		<br>
+		<div [ngSwitch]="table">
+			<div *ngSwitchCase="'User'">
+				<table class="table table-hover">
+					<thead>
+					    <tr>
+					    	<th scope="col" *ngFor='let col of columnHeaders'>{{ col }}</th>
+					    </tr>
+					</thead>
+				 	<tbody>
+						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+							<td>{{ result.UID }}</td>
+							<td>{{ result.Email }}</td>
+							<td>{{ result.FirstName }}</td>
+							<td>{{ result.LastName }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div *ngSwitchCase="'Player'">
+				<table class="table table-hover">
+					<thead>
+					    <tr>
+					    	<th scope="col" *ngFor='let col of columnHeaders'>{{ col }}</th>
+					    </tr>
+					</thead>
+				 	<tbody>
+						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+							<td>{{ result.UID }}</td>
+							<td>{{ result.Username }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div *ngSwitchCase="'Developer'">
+				<table class="table table-hover">
+					<thead>
+					    <tr>
+					    	<th scope="col" *ngFor='let col of columnHeaders'>{{ col }}</th>
+					    </tr>
+					</thead>
+				 	<tbody>
+						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+							<td>{{ result.UID }}</td>
+							<td>{{ result.Name }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div *ngSwitchCase="'Moderator'">
+				<table class="table table-hover">
+					<thead>
+					    <tr>
+					    	<th scope="col" *ngFor='let col of columnHeaders'>{{ col }}</th>
+					    </tr>
+					</thead>
+				 	<tbody>
+						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+							<td>{{ result.UID }}</td>
+							<td>{{ result.GID }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div *ngSwitchCase="'Game'">
+				<table class="table table-hover">
+					<thead>
+					    <tr>
+					    	<th scope="col" *ngFor='let col of columnHeaders'>{{ col }}</th>
+					    </tr>
+					</thead>
+				 	<tbody>
+						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }" (click)="goToGame(result.GID)">
+							<td>{{ result.GID }}</td>
+							<td>{{ result.Title }}</td>
+							<td>{{ result.Name }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div *ngSwitchCase="'Review'">
+				<table class="table table-hover">
+					<thead>
+					    <tr>
+					    	<th scope="col" *ngFor='let col of columnHeaders'>{{ col }}</th>
+					    </tr>
+					</thead>
+				 	<tbody>
+						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+							<td>{{ result.UID }}</td>
+							<td>{{ result.Username }}</td>
+							<td>{{ result.Title }}</td>
+							<td>{{ result.Rating }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div *ngSwitchCase="'Purchase'">
+				<table class="table table-hover">
+					<thead>
+					    <tr>
+					    	<th scope="col" *ngFor='let col of columnHeaders'>{{ col }}</th>
+					    </tr>
+					</thead>
+				 	<tbody>
+						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+							<td>{{ result.GID }}</td>
+							<td>{{ result.UID }}</td>
+							<td>{{ result.Username }}</td>
+							<td>{{ result.Title }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div *ngSwitchCase="'Achievement'">
+				<table class="table table-hover">
+					<thead>
+					    <tr>
+					    	<th scope="col" *ngFor='let col of columnHeaders'>{{ col }}</th>
+					    </tr>
+					</thead>
+				 	<tbody>
+						<tr *ngFor="let result of queryResult | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
+							<td>{{ result.Number }}</td>
+							<td>{{ result.GID }}</td>
+							<td>{{ result.Title }}</td>
+							<td>{{ result.Name }}</td>	
+							<td>{{ result.Points }}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<br>
+		<div class="row justify-content-md-center">
+			<ng-container *ngIf="totalPages > 0">
+				<button type="button" class="btn-default btn" *ngIf="currentPage > 1" (click)="prevPage()">Prev</button>
+				<button type="button" class="btn-default btn" *ngIf="currentPage < totalPages" (click)="nextPage()">Next</button>
+			</ng-container>	
+		</div>
+	</div>
+</ng-template>

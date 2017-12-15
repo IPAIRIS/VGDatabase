@@ -1,0 +1,35 @@
+<br>
+<div class="container">
+	<div class="alert alert-danger alert-dismissable" *ngIf="failedLogin == true" >
+	  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	  <strong>Login Failed!</strong> Incorrect Email, Password or Account type. Please Try again
+	</div>
+
+	<form [formGroup]="rForm" (ngSubmit)="formSubmit(rForm.value)">
+		<div class="form-container">
+
+			<div class="form-group">
+				<label>Email
+					<input type="email" formControlName="email">
+				</label>			
+			</div>
+
+			<div class="form-group">
+				<label>Password
+					<input type="password" formControlName="password">
+				</label> 
+			</div>
+
+			<div class="form-group">
+				<label for="sel1">Account Type
+					<select class="form-control" id="sel1" name="accType" formControlName="accountType">
+						<option>Player</option>
+						<option>Developer</option>
+						<option>Moderator</option>
+					</select>
+				</label> 
+			</div>
+			<input type="submit" class="btn-default btn" value="Login" [disabled]="!rForm.valid">
+		</div>
+	</form>
+</div>
