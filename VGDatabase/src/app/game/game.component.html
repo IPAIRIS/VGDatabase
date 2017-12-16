@@ -6,6 +6,39 @@
 	<div class="container">
 		<h1>{{ gameInfo[0].Title }}</h1>
 		<br>
+			<div class="row">
+				<div class="col">
+					<h6>Developer:</h6>
+				</div>
+				<div class="col-6">
+					{{gameInfo[0].Name }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h6>Release Date:</h6>
+				</div>
+				<div class="col-6">
+					{{ gameInfo[0].ReleaseDate }}
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<h6>Description:</h6>
+				</div>
+				<div class="col-6">
+					{{ gameInfo[0].Description }}
+				</div>
+			</div>	
+			<div class="row">
+				<div class="col">
+					<h6>Price:</h6>
+				</div>
+				<div class="col-6">
+					{{ gameInfo[0].Price }}
+				</div>
+			</div>							
+		<br>
 		<h2>Reviews</h2>
 		<br>
 		<div *ngIf="hasReviews == true;then noReviews else hasReviews"></div>
@@ -21,11 +54,11 @@
 				</thead>
 				<tbody>
 					<tr *ngFor="let review of reviews | paginate: { itemsPerPage: pageSize, currentPage: currentPage }">
-							<td>{{ result.Username }}</td>
-							<td>{{ result.gTitle }}</td>
-							<td>{{ result.rTitle }}</td>
-							<td>{{ result.Body }}</td>
-							<td>{{ result.Stars }}</td>
+							<td>{{ review.Username }}</td>
+							<td>{{ review.gTitle }}</td>
+							<td>{{ review.rTitle }}</td>
+							<td>{{ review.Body }}</td>
+							<td>{{ review.Stars }}</td>
 					</tr>
 				</tbody>
 			</table>
