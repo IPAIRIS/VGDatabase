@@ -30,7 +30,7 @@ exports.getFromUid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM moderator M, user U WHERE M.UID = " + req.params.uid + " AND M.UID = U.UID", function(error, result, fields) {
+	connect.query("SELECT * FROM moderator M, user U, Game G  WHERE M.UID = " + req.params.uid + " AND M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -66,7 +66,7 @@ exports.getFromGid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM moderator M, user U WHERE M.GID = " + req.params.gid + " AND M.UID = U.UID", function(error, result, fields) {
+	connect.query("SELECT * FROM moderator M, user U, Game G  WHERE M.GID = " + req.params.gid + " AND M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -102,7 +102,7 @@ exports.getFromEmail = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM moderator M, user U WHERE U.Email LIKE '" + req.params.email + "' AND M.UID = U.UID", function(error, result, fields) {
+	connect.query("SELECT * FROM moderator M, user U, Game G  WHERE U.Email LIKE '" + req.params.email + "' AND M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -138,7 +138,7 @@ exports.getAll = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM moderator M, user U WHERE M.UID = U.UID", function(error, result, fields) {
+	connect.query("SELECT * FROM moderator M, user U, Game G WHERE M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {

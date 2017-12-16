@@ -32,6 +32,7 @@ export class UploadComponent implements OnInit {
 	duplicateReviews: boolean = false;
 	duplicatePurchases: boolean = false;
 	duplicateAchievements: boolean = false;
+	successUpload: boolean = false;
 
 	loggedIn: boolean = false;
 	moderator: boolean = false;
@@ -81,6 +82,13 @@ export class UploadComponent implements OnInit {
 
 	getFiles(event) 
 	{ 
+		this.failedPlayers = 0;
+		this.failedDevelopers = 0;
+		this.failedModerators  = 0;
+		this.failedGames  = 0;
+		this.failedReviews  = 0;
+		this.failedPurchases  = 0;
+		this.failedAchievements  = 0;
 		this.fileNotLoaded = false;
     	this.jsonNotEntered = false;
     	this.errorParsingJson = false;
@@ -89,6 +97,7 @@ export class UploadComponent implements OnInit {
     	this.duplicateReviews = false;
 		this.duplicatePurchases = false;
 		this.duplicateAchievements = false;
+		this.successUpload = false;
 
 	    this.files = event.target.files; 
 	    var reader = new FileReader(); 
@@ -119,6 +128,7 @@ export class UploadComponent implements OnInit {
     	this.duplicateReviews = false;
 		this.duplicatePurchases = false;
 		this.duplicateAchievements = false;
+		this.successUpload = false;
 
     	if (this.filestring == '')
     	{
@@ -182,7 +192,8 @@ export class UploadComponent implements OnInit {
 		    		{
 		    			this.sendAchievement(this.jsonText.achievements[i]);
 					}
-		    	}     			
+		    	}   
+		    	this.successUpload = true;  			
     		}
 
 	    	this.uploading = false;

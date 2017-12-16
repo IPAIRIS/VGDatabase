@@ -31,7 +31,7 @@ exports.getFromTitle = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM game G, developer D WHERE G.Title LIKE '%" + req.params.title + "%' AND G.UID = D.UID", function(error, result, fields) {
+	connect.query("SELECT G.GID, G.Title, G.UID, G.ReleaseDate, G.Description as gDescription, G.Price, D.Name, D.Description as dDescription, D.Founded FROM game G, developer D WHERE G.Title LIKE '%" + req.params.title + "%' AND G.UID = D.UID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -66,7 +66,7 @@ exports.getFromGid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM game G, developer D WHERE G.GID = " + req.params.gid + " AND G.UID = D.UID", function(error, result, fields) {
+	connect.query("SELECT G.GID, G.Title, G.UID, G.ReleaseDate, G.Description as gDescription, G.Price, D.Name, D.Description as dDescription, D.Founded FROM game G, developer D WHERE G.GID = " + req.params.gid + " AND G.UID = D.UID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -101,7 +101,7 @@ exports.getFromDeveloperName = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM game G, developer D WHERE D.Name LIKE '%" + req.params.dName + "%' AND G.UID = D.UID", function(error, result, fields) {
+	connect.query("SELECT G.GID, G.Title, G.UID, G.ReleaseDate, G.Description as gDescription, G.Price, D.Name, D.Description as dDescription, D.Founded FROM game G, developer D WHERE D.Name LIKE '%" + req.params.dName + "%' AND G.UID = D.UID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -136,7 +136,7 @@ exports.getAll = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM game G, developer D WHERE D.UID = G.UID", function(error, result, fields) {
+	connect.query("SELECT G.GID, G.Title, G.UID, G.ReleaseDate, G.Description as gDescription, G.Price, D.Name, D.Description as dDescription, D.Founded FROM game G, developer D WHERE D.UID = G.UID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query', error);
 		} else {
