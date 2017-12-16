@@ -30,9 +30,9 @@ exports.getFromUid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT UID, GID, Stars, review.Title as rTitle, game.Title as gTitle, CreationDate, Body, Username FROM review R, game G, player P WHERE R.UID = " + req.params.uid + " AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT R.UID, R.GID, R.Stars, R.Title as rTitle, G.Title as gTitle, R.CreationDate, R.Body, P.Username FROM review R, game G, player P WHERE R.UID = " + req.params.uid + " AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error in the query', error);
 		} else {
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
@@ -66,9 +66,9 @@ exports.getFromUsername = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT UID, GID, Stars, review.Title as rTitle, game.Title as gTitle, CreationDate, Body, Username FROM review R, game G, player P WHERE P.Username LIKE '%" + req.params.username + "%' AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT R.UID, R.GID, R.Stars, R.Title as rTitle, G.Title as gTitle, R.CreationDate, R.Body, P.Username FROM review R, game G, player P WHERE P.Username LIKE '%" + req.params.username + "%' AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error in the query', error);
 		} else {
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
@@ -102,9 +102,9 @@ exports.getFromGid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT UID, GID, Stars, review.Title as rTitle, game.Title as gTitle, CreationDate, Body, Username FROM review R, game G, player P WHERE G.GID = " + req.params.gid + " AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT R.UID, R.GID, R.Stars, R.Title as rTitle, G.Title as gTitle, R.CreationDate, R.Body, P.Username FROM review R, game G, player P WHERE G.GID = " + req.params.gid + " AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error in the query', error);
 		} else {
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
@@ -138,9 +138,9 @@ exports.getFromGameTitle = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT UID, GID, Stars, review.Title as rTitle, game.Title as gTitle, CreationDate, Body, Username FROM review R, game G, player P WHERE G.Title LIKE '%" + req.params.title + "%' AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT R.UID, R.GID, R.Stars, R.Title as rTitle, G.Title as gTitle, R.CreationDate, R.Body, P.Username FROM review R, game G, player P WHERE G.Title LIKE '%" + req.params.title + "%' AND R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error in the query', error);
 		} else {
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
@@ -174,9 +174,9 @@ exports.getAll = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT UID, GID, Stars, review.Title as rTitle, game.Title as gTitle, CreationDate, Body, Username FROM review R, game G, player P WHERE R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
+	connect.query("SELECT R.UID, R.GID, R.Stars, R.Title as rTitle, G.Title as gTitle, R.CreationDate, R.Body, P.Username FROM review R, game G, player P WHERE R.UID = P.UID AND G.GID = R.GID", function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error in the query', error);
 		} else {
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);

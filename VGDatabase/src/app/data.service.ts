@@ -137,7 +137,7 @@ export class DataService {
 	}
 
   	getAllReviews() {
-		return this.http.get("http://104.198.184.180:8080/api/reviews/all").map(result => this.result = result.json().data);
+		return this.http.get("http://localhost:8080/api/reviews/all").map(result => this.result = result.json().data);
 	}		
 
 	insertReview(review: any) {
