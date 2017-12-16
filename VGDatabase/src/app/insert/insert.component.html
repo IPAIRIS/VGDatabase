@@ -190,39 +190,43 @@
 					<label>Description
 						<input type="text" formControlName="Description">
 					</label>			
-				</div>			
+				</div>
+				<div class="alert alert-danger alert-dismissable" *ngIf="emailAlreadyExists == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Email Already Exists!</strong> the email entered already exists. Enter a different email
+				</div>
+				<div class="alert alert-danger alert-dismissable" *ngIf="developerNameAlreadyExists == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Developer Name Already Exists!</strong> the developer Name entered already exists. Enter a different name
+				</div>
+				<div class="alert alert-danger alert-dismissable" *ngIf="usernameAlreadyExists == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Username Already Exists!</strong> the username entered already exists. Enter a different username
+				</div>
+				<div class="alert alert-danger alert-dismissable" *ngIf="developerDoesNotExist == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Developer Doesn't Exist</strong> the developer entered doesn't exist. Enter a valid developer UID
+				</div>
+				<div class="alert alert-danger alert-dismissable" *ngIf="playerDoesNotExist == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Player Doesn't Exist</strong> the player entered doesn't exist. Enter a valid player UID
+				</div>
+				<div class="alert alert-danger alert-dismissable" *ngIf="gameDoesNotExist == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Game Doesn't Exist</strong> the game entered doesn't exist. Enter a valid game GID
+				</div>
+				<div class="alert alert-danger alert-dismissable" *ngIf="numberForGameAlreadyExists == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Achievement number already exists</strong> Achievement number for the game GID entered already exists. Please enter a different number
+				</div>
+					<div class="alert alert-dismissable" *ngIf="success == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Successful insert</strong>
+				</div>
 				<input type="submit" class="btn-default btn" value="Insert" [disabled]="!achievementForm.valid">
 			</div>
 	  	</form>  		
 	  </div>
 	</div>
 	<br>
-	<div class="alert alert-danger alert-dismissable" *ngIf="emailAlreadyExists == true" >
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Email Already Exists!</strong> the email entered already exists. Enter a different email
-	</div>
-	<div class="alert alert-danger alert-dismissable" *ngIf="developerNameAlreadyExists == true" >
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Developer Name Already Exists!</strong> the developer Name entered already exists. Enter a different name
-	</div>
-	<div class="alert alert-danger alert-dismissable" *ngIf="usernameAlreadyExists == true" >
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Username Already Exists!</strong> the username entered already exists. Enter a different username
-	</div>
-	<div class="alert alert-danger alert-dismissable" *ngIf="developerDoesNotExist == true" >
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Developer Doesn't Exist</strong> the developer entered doesn't exist. Enter a valid developer UID
-	</div>
-	<div class="alert alert-danger alert-dismissable" *ngIf="playerDoesNotExist == true" >
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Player Doesn't Exist</strong> the player entered doesn't exist. Enter a valid player UID
-	</div>
-	<div class="alert alert-danger alert-dismissable" *ngIf="gameDoesNotExist == true" >
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Game Doesn't Exist</strong> the game entered doesn't exist. Enter a valid game GID
-	</div>
-	<div class="alert alert-danger alert-dismissable" *ngIf="numberForGameAlreadyExists == true" >
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		<strong>Achievement number already exists</strong> Achievement number for the game GID entered already exists. Please enter a different number
-	</div>
 </ng-template>

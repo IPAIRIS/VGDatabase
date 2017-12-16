@@ -42,6 +42,7 @@ export class InsertComponent implements OnInit {
   playerDoesNotExist: boolean = false;
   gameDoesNotExist: boolean = false;
   numberForGameAlreadyExists: boolean = false;
+  success: boolean = false;
 
   constructor(private fb: FormBuilder,
   				private dataService: DataService,
@@ -174,12 +175,29 @@ export class InsertComponent implements OnInit {
   }    
 
   tableDropDownChanged(val: any) {
+    
+    this.emailAlreadyExists = false;
+    this.developerNameAlreadyExists = false;
+    this.usernameAlreadyExists = false;
+    this.developerDoesNotExist = false;
+    this.playerDoesNotExist = false;
+    this.gameDoesNotExist = false;
+    this.numberForGameAlreadyExists = false;
+    this.success = false;
     this.table = this.tableOptions[val].val;
     console.log(val, this.table);
   }
 
   accDDChange(val: any)
   {
+    this.emailAlreadyExists = false;
+    this.developerNameAlreadyExists = false;
+    this.usernameAlreadyExists = false;
+    this.developerDoesNotExist = false;
+    this.playerDoesNotExist = false;
+    this.gameDoesNotExist = false;
+    this.numberForGameAlreadyExists = false;
+    this.success = false;    
   	this.aType = this.accTypeOptions[val].val;    
   }
 
@@ -192,6 +210,7 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.success = false;
 
     if (this.aType == 'Developer')
     {
@@ -199,6 +218,7 @@ export class InsertComponent implements OnInit {
         if ( res.length == 0 )
         {
           this.dataService.insertDeveloper(post);
+          this.success = true;
         } 
         else 
         {
@@ -215,6 +235,7 @@ export class InsertComponent implements OnInit {
             if (res.length == 0)
             {
               this.dataService.insertPlayer(post);
+              this.success = true;
             }
             else
             {
@@ -241,6 +262,7 @@ export class InsertComponent implements OnInit {
             else 
             {
               this.dataService.insertModerator(post);
+              this.success = true;
             }
           });
         } 
@@ -261,6 +283,7 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.success = false;
 
     this.dataService.getDevelopersFromUID(post.UID).subscribe((res) => {
       if ( res.length == 0 )
@@ -270,6 +293,7 @@ export class InsertComponent implements OnInit {
       else 
       {
         this.dataService.insertGame(post);
+        this.success = true;
       }
     });
   }
@@ -283,6 +307,7 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.success = false;
 
     this.dataService.getPlayersFromUID(post.UID).subscribe((res) => {
       if ( res.length == 0 )
@@ -299,6 +324,7 @@ export class InsertComponent implements OnInit {
           else 
           {
             this.dataService.insertReview(post);
+            this.success = true;
           }
         });        
       }
@@ -314,6 +340,7 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.success = false;
 
     this.dataService.getPlayersFromUID(post.UID).subscribe((res) => {
       if ( res.length == 0 )
@@ -330,6 +357,7 @@ export class InsertComponent implements OnInit {
           else 
           {
             this.dataService.insertPurchase(post);
+            this.success = true;
           }
         });        
       }
@@ -345,6 +373,7 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.success = false;
 
     this.dataService.getGamesFromGID(post.GID).subscribe((res) => {
       if ( res.length == 0 )
@@ -357,6 +386,7 @@ export class InsertComponent implements OnInit {
           if ( res.length == 0 )
           {
             this.dataService.insertAchievement(post);
+            this.success = true;
           } 
           else 
           {
