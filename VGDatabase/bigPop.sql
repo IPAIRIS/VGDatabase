@@ -1,3 +1,14 @@
+SET FOREIGN_KEY_CHECKS=0;
+TRUNCATE user;
+TRUNCATE player;
+TRUNCATE moderator;
+TRUNCATE achievement;
+TRUNCATE developer;
+TRUNCATE review;
+TRUNCATE purchase;
+TRUNCATE game;
+SET FOREIGN_KEY_CHECKS=1;
+
 insert into user (UID,Email,FirstName,LastName,Password) values
 (1,"testemail1@notgmail.com","testJohn1","testSmith1","testPassword1"),
 (2,"testemail2@notgmail.com","testJohn2","testSmith2","testPassword2"),
