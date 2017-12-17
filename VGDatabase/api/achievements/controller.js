@@ -1,6 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
+var config = require('config');
+var squel = require("squel");
+
+const sqlConfig = config.get('mySQL.Config');
+
+const connect = mysql.createConnection({
+	host: sqlConfig.host,
+	user: sqlConfig.user,
+	password: sqlConfig.password,
+	database: sqlConfig.database,
+});
+
+let response = {
+	status:  200,
+	data: [],
+	message: null
+};	
 
 /** 
  * =============================================================================
@@ -9,185 +26,172 @@ const mysql = require('mysql');
  */
 exports.getFromGid = function(req, res) {
 
-	const connect = mysql.createConnection({
-		host: 'localhost',
-		user: 'brett',
-		password: 'password',
-		database: 'VideoGameDB',
-	});
-
 	connect.connect(function(error) {
 		if (error) {
-			console.log('Error Connecting to Database');
+			console.log('Error Connecting to Database', error);
 		} else {
 			console.log('Connected to Database');
 		}
 	});
 
-	let response = {
-		status:  200,
-		data: [],
-		message: null
-	};	
+	var params = req.params;
 
-	connect.query("SELECT * FROM achievement A, game G WHERE A.GID = " + req.params.gid + " AND A.GID = G.GID", function(error, result, fields) {
+	var query = squel.select()
+        .from("achievement", "A")
+        .from("game","G")
+        .where("A.GID = " + params.gid.replace(/["']/g, ""))
+        .where("A.GID = G.GID")
+        .toString();
+
+	connect.query(query, function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error getting achievements from GID', error);
 		} else {
+			console.log('get achievements from gid');
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
 			response.data = json;
-			console.log(json);
 			res.json(response);
 		}
 	});
+
+	connect.end();
 };
 
 exports.getFromGameTitle = function(req, res) {
 
-	const connect = mysql.createConnection({
-		host: 'localhost',
-		user: 'brett',
-		password: 'password',
-		database: 'VideoGameDB',
-	});
-
 	connect.connect(function(error) {
 		if (error) {
-			console.log('Error Connecting to Database');
+			console.log('Error Connecting to Database', error);
 		} else {
 			console.log('Connected to Database');
 		}
 	});
 
-	let response = {
-		status:  200,
-		data: [],
-		message: null
-	};	
+	var params = req.params;
 
-	connect.query("SELECT * FROM achievement A, game G WHERE G.Title LIKE '%" + req.params.title + "%' AND A.GID = G.GID", function(error, result, fields) {
+	var query = squel.select()
+        .from("achievement", "A")
+        .from("game","G")
+        .where("G.Title LIKE '%" + params.gid.replace(/["']/g, "") + "%'")
+        .where("A.GID = G.GID")
+        .toString();
+
+	connect.query(query, function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error getting achievements from Title', error);
 		} else {
+			console.log('get achievements from game title');
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
 			response.data = json;
-			console.log(json);
 			res.json(response);
 		}
 	});
+
+	connect.end();
 };
 
 exports.getFromKey = function(req, res) {
 
-	const connect = mysql.createConnection({
-		host: 'localhost',
-		user: 'brett',
-		password: 'password',
-		database: 'VideoGameDB',
-	});
-
 	connect.connect(function(error) {
 		if (error) {
-			console.log('Error Connecting to Database');
+			console.log('Error Connecting to Database', error);
 		} else {
 			console.log('Connected to Database');
 		}
 	});
 
-	let response = {
-		status:  200,
-		data: [],
-		message: null
-	};	
+	var params = req.params;
 
-	connect.query("SELECT * FROM achievement A, game G WHERE A.GID = " + req.params.gid + " AND  A.Number = " + req.params.number + " AND A.GID = G.GID", function(error, result, fields) {
+	var query = squel.select()
+        .from("achievement", "A")
+        .from("game","G")
+        .where("A.GID = " + params.gid.replace(/["']/g, ""))
+        .where("A.Number = " + params.number.replace(/["']/g, ""))
+        .where("A.GID = G.GID")
+        .toString();
+
+	connect.query(query, function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error getting achievements grom gid/number', error);
 		} else {
+			console.log('get achievements from key');
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
 			response.data = json;
-			console.log(json);
 			res.json(response);
 		}
 	});
+
+	connect.end();
 };
 
 exports.getAll = function(req, res) {
 
-	const connect = mysql.createConnection({
-		host: 'localhost',
-		user: 'brett',
-		password: 'password',
-		database: 'VideoGameDB',
-	});
-
 	connect.connect(function(error) {
 		if (error) {
-			console.log('Error Connecting to Database');
+			console.log('Error Connecting to Database', error);
 		} else {
 			console.log('Connected to Database');
 		}
 	});
 
-	let response = {
-		status:  200,
-		data: [],
-		message: null
-	};	
+	var params = req.params;
 
-	connect.query("SELECT * FROM achievement", function(error, result, fields) {
+	var query = squel.select()
+        .from("achievement", "A")
+        .from("game","G")
+        .where("A.GID = G.GID")
+        .toString();
+
+	connect.query(query, function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error getting all achievements', error);
 		} else {
+			console.log('get all achievements');
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
 			response.data = json;
-			console.log(json);
 			res.json(response);
 		}
 	});
+
+	connect.end();
 };
 
 exports.insert = function(req, res) {
 
-	const connect = mysql.createConnection({
-		host: 'localhost',
-		user: 'brett',
-		password: 'password',
-		database: 'VideoGameDB',
-	});
-
 	connect.connect(function(error) {
 		if (error) {
-			console.log('Error Connecting to Database');
+			console.log('Error Connecting to Database', error);
 		} else {
 			console.log('Connected to Database');
 		}
 	});
 
-	let response = {
-		status:  200,
-		data: [],
-		message: null
-	};
+	var params = req.params;
 
-	console.log(req.body.foundedDate);
+	var query = squel.insert()
+        .into("achievement")
+        .set("Number", params.Number)
+        .set("GID", params.GID)
+        .set("Title", params.Title.replace(/["']/g, ""))
+        .set("Description", params.Description.replace(/["']/g, ""))
+        .set("Points", params.Points)
+        .toString();              			
 
-	var achievementStatement = "INSERT INTO achievement (Number, GID, Title, Description, Points) VALUES (" + req.body.Number + 
-				"," + req.body.GID + ", '" + req.body.Title + "', '" + req.body.Description + "', " + req.body.Points + ")";			
-
-	connect.query(achievementStatement, function(error, result, fields) {
+	connect.query(query, function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query 1', error);
+			console.log('Error inserting into achievement', error);
 		} else {
+			console.log('Inserting into achievement: ', query);
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
 			response.data = json;
-			console.log(json);
 			res.json(response);
 		}
 	});
+
+	connect.end();
 };

@@ -30,9 +30,9 @@ exports.getFromUid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM moderator M, user U, Game G  WHERE M.UID = " + req.params.uid + " AND M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM moderator M, user U, game G  WHERE M.UID = " + req.params.uid + " AND M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error in the query', error);
 		} else {
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
@@ -66,9 +66,9 @@ exports.getFromGid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM moderator M, user U, Game G  WHERE M.GID = " + req.params.gid + " AND M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM moderator M, user U, game G  WHERE M.GID = " + req.params.gid + " AND M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error in the query', error);
 		} else {
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
@@ -102,9 +102,9 @@ exports.getFromEmail = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM moderator M, user U, Game G  WHERE U.Email LIKE '" + req.params.email + "' AND M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM moderator M, user U, game G  WHERE U.Email LIKE '" + req.params.email + "' AND M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error in the query', error);
 		} else {
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
@@ -138,9 +138,9 @@ exports.getAll = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM moderator M, user U, Game G WHERE M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM moderator M, user U, game G WHERE M.UID = U.UID AND G.GID = M.GID", function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error in the query', error);
 		} else {
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);

@@ -1,6 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
+var config = require('config');
+var squel = require("squel");
+
+const sqlConfig = config.get('mySQL.Config');
+
+const connect = mysql.createConnection({
+	host: sqlConfig.host,
+	user: sqlConfig.user,
+	password: sqlConfig.password,
+	database: sqlConfig.database,
+});
+
+let response = {
+	status:  200,
+	data: [],
+	message: null
+};	
 
 /** 
  * =============================================================================
@@ -9,98 +26,104 @@ const mysql = require('mysql');
  */
 exports.getFromUid = function(req, res) {
 
-	const connect = mysql.createConnection({
-		host: 'localhost',
-		user: 'brett',
-		password: 'password',
-		database: 'VideoGameDB',
-	});
-
 	connect.connect(function(error) {
 		if (error) {
-			console.log('Error Connecting to Database');
+			console.log('Error Connecting to Database', error);
 		} else {
 			console.log('Connected to Database');
 		}
 	});
 
-	let response = {
-		status:  200,
-		data: [],
-		message: null
-	};	
+	var params = req.params;
 
-	connect.query("SELECT * FROM developer D, user U WHERE D.UID = " + req.params.uid + " AND D.UID = U.UID", function(error, result, fields) {
+	var query = squel.select()
+        .from("developer", "D")
+        .from("user","U")
+        .where("D.UID = " + params.uid)
+        .where("D.UID = U.UID")
+        .toString();	
+
+	connect.query(query, function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error getting developer from uid', error);
 		} else {
+			console.log('Get developer from uid');
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
 			response.data = json;
-			console.log(json);
 			res.json(response);
 		}
 	});
+
+	connect.end();
 };
 
 exports.getFromName = function(req, res) {
 
-	const connect = mysql.createConnection({
-		host: 'localhost',
-		user: 'brett',
-		password: 'password',
-		database: 'VideoGameDB',
-	});
-
 	connect.connect(function(error) {
 		if (error) {
-			console.log('Error Connecting to Database');
+			console.log('Error Connecting to Database', error);
 		} else {
 			console.log('Connected to Database');
 		}
 	});
 
-	let response = {
-		status:  200,
-		data: [],
-		message: null
-	};	
+	var params = req.params;
 
-	connect.query("SELECT * FROM developer D, user U WHERE D.Name LIKE '%" + req.params.name + "%' AND D.UID = U.UID", function(error, result, fields) {
+	var query = squel.select()
+        .from("developer", "D")
+        .from("user","U")
+        .where("D.Name LIKE '%" + params.name.replace(/["']/g, "") + "%'")
+        .where("D.UID = U.UID")
+        .toString();	
+
+	connect.query(query, function(error, result, fields) {
 		if (error) {
-			console.log('Error in the query');
+			console.log('Error getting developer from name', error);
 		} else {
+			console.log('Get developer from name');
 			var string = JSON.stringify(result);
 			var json = JSON.parse(string);
 			response.data = json;
-			console.log(json);
 			res.json(response);
 		}
 	});
+
+	connect.end();
 };
 
 exports.getFromEmail = function(req, res) {
 
-	const connect = mysql.createConnection({
-		host: 'localhost',
-		user: 'brett',
-		password: 'password',
-		database: 'VideoGameDB',
-	});
-
 	connect.connect(function(error) {
 		if (error) {
-			console.log('Error Connecting to Database');
+			console.log('Error Connecting to Database', error);
 		} else {
 			console.log('Connected to Database');
 		}
 	});
 
-	let response = {
-		status:  200,
-		data: [],
-		message: null
-	};	
+	var params = req.params;
+
+	var query = squel.select()
+        .from("developer", "D")
+        .from("user","U")
+        .where("U.Email LIKE '%" + params.name.replace(/["']/g, "") + "%'")
+        .where("D.UID = U.UID")
+        .toString();	
+
+	connect.query(query, function(error, result, fields) {
+		if (error) {
+			console.log('Error getting developer from email', error);
+		} else {
+			console.log('Get developers from emails');
+			var string = JSON.stringify(result);
+			var json = JSON.parse(string);
+			response.data = json;
+			res.json(response);
+		}
+	});
+
+	connect.end();
 
 	connect.query("SELECT * FROM developer D, user U WHERE U.Email LIKE '" + req.params.email + "' AND D.UID = U.UID", function(error, result, fields) {
 		if (error) {
