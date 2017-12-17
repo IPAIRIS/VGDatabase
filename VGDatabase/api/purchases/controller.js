@@ -187,6 +187,42 @@ exports.getAll = function(req, res) {
 	});
 };
 
+exports.getFromKey = function(req, res) {
+
+	const connect = mysql.createConnection({
+		host: 'localhost',
+		user: 'brett',
+		password: 'password',
+		database: 'VideoGameDB',
+	});
+
+	connect.connect(function(error) {
+		if (error) {
+			console.log('Error Connecting to Database');
+		} else {
+			console.log('Connected to Database');
+		}
+	});
+
+	let response = {
+		status:  200,
+		data: [],
+		message: null
+	};	
+
+	connect.query("SELECT * FROM purchase PC, game G, Player P WHERE PC.UID = " + req.params.uid + " AND PC.GID = " + req.params.gid + " AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
+		if (error) {
+			console.log('Error in the query');
+		} else {
+			var string = JSON.stringify(result);
+			var json = JSON.parse(string);
+			response.data = json;
+			console.log(json);
+			res.json(response);
+		}
+	});
+};
+
 exports.insert = function(req, res) {
 
 	const connect = mysql.createConnection({

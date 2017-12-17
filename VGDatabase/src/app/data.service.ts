@@ -142,6 +142,11 @@ export class DataService {
 		return this.http.get("http://" + this.IP + ":" + this.PORT + "/api/reviews/all").map(result => this.result = result.json().data);
 	}		
 
+	getReview(gid, uid)
+	{
+		return this.http.get("http://" + this.IP + ":" + this.PORT + "/api/reviews/key/" + gid + "/" + uid).map(result => this.result = result.json().data);
+	}	
+
 	insertReview(review: any) {
 		return this.hClient.post("http://" + this.IP + ":" + this.PORT + "/api/reviews/insert", review).subscribe();
 	}	
@@ -166,7 +171,12 @@ export class DataService {
 
   	getAllPurchases() {
 		return this.http.get("http://" + this.IP + ":" + this.PORT + "/api/purchases/all").map(result => this.result = result.json().data);
-	}	
+	}
+
+	getPurchase(gid, uid)
+	{
+		return this.http.get("http://" + this.IP + ":" + this.PORT + "/api/purchases/key/" + gid + "/" + uid).map(result => this.result = result.json().data);
+	}
 
 	insertPurchase(purchase: any) {
 		return this.hClient.post("http://" + this.IP + ":" + this.PORT + "/api/purchases/insert", purchase).subscribe();

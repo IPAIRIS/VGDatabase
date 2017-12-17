@@ -42,7 +42,9 @@ export class InsertComponent implements OnInit {
   playerDoesNotExist: boolean = false;
   gameDoesNotExist: boolean = false;
   numberForGameAlreadyExists: boolean = false;
+  purchaseAlreadyExists: boolean = false;
   success: boolean = false;
+  reviewAlreadyExists: boolean = false;
 
   constructor(private fb: FormBuilder,
   				private dataService: DataService,
@@ -183,6 +185,8 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.purchaseAlreadyExists = false;
+    this.reviewAlreadyExists = false;
     this.success = false;
     this.table = this.tableOptions[val].val;
     console.log(val, this.table);
@@ -197,6 +201,8 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.purchaseAlreadyExists = false;
+    this.reviewAlreadyExists = false;
     this.success = false;    
   	this.aType = this.accTypeOptions[val].val;    
   }
@@ -210,6 +216,8 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.purchaseAlreadyExists = false;
+    this.reviewAlreadyExists = false;
     this.success = false;
 
     if (this.aType == 'Developer')
@@ -283,6 +291,8 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.purchaseAlreadyExists = false;
+    this.reviewAlreadyExists = false;
     this.success = false;
 
     this.dataService.getDevelopersFromUID(post.UID).subscribe((res) => {
@@ -307,6 +317,8 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.purchaseAlreadyExists = false;
+    this.reviewAlreadyExists = false;
     this.success = false;
 
     this.dataService.getPlayersFromUID(post.UID).subscribe((res) => {
@@ -323,8 +335,17 @@ export class InsertComponent implements OnInit {
           } 
           else 
           {
-            this.dataService.insertReview(post);
-            this.success = true;
+            this.dataService.getReview(post.GID, post.UID).subscribe((res) => {
+              if ( res.length == 0 )
+              {
+                this.dataService.insertReview(post);
+                this.success = true;
+              } 
+              else 
+              {
+                this.reviewAlreadyExists = true;
+              }
+            });
           }
         });        
       }
@@ -340,6 +361,8 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.purchaseAlreadyExists = false;
+    this.reviewAlreadyExists = false;
     this.success = false;
 
     this.dataService.getPlayersFromUID(post.UID).subscribe((res) => {
@@ -356,8 +379,17 @@ export class InsertComponent implements OnInit {
           } 
           else 
           {
-            this.dataService.insertPurchase(post);
-            this.success = true;
+            this.dataService.getPurchase(post.GID, post.UID).subscribe((res) => {
+              if ( res.length == 0 )
+              {
+                this.dataService.insertPurchase(post);
+                this.success = true;
+              } 
+              else 
+              {
+                this.purchaseAlreadyExists = true;
+              }
+            });
           }
         });        
       }
@@ -373,6 +405,8 @@ export class InsertComponent implements OnInit {
     this.playerDoesNotExist = false;
     this.gameDoesNotExist = false;
     this.numberForGameAlreadyExists = false;
+    this.purchaseAlreadyExists = false;
+    this.reviewAlreadyExists = false;
     this.success = false;
 
     this.dataService.getGamesFromGID(post.GID).subscribe((res) => {

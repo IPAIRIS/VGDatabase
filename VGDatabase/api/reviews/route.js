@@ -19,6 +19,7 @@ router.get('/uid/:uid', controller.getFromUid);
 router.get('/username/:username', controller.getFromUsername);
 router.get('/gid/:gid', controller.getFromGid);
 router.get('/gameTitle/:title', controller.getFromGameTitle);
+router.get('/key/:gid/:uid', controller.getFromKey);
 router.get('/all', controller.getAll);
 router.post('/insert', controller.insert);
 

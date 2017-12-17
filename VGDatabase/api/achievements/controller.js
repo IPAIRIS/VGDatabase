@@ -107,8 +107,8 @@ exports.getFromKey = function(req, res) {
 	var query = squel.select()
         .from("achievement", "A")
         .from("game","G")
-        .where("A.GID = " + params.gid.replace(/["']/g, ""))
-        .where("A.Number = " + params.number.replace(/["']/g, ""))
+        .where("A.GID = " + params.gid)
+        .where("A.Number = " + params.number)
         .where("A.GID = G.GID")
         .toString();
 

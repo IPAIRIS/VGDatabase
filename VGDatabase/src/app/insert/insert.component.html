@@ -215,6 +215,14 @@
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong>Game Doesn't Exist</strong> the game entered doesn't exist. Enter a valid game GID
 				</div>
+				<div class="alert alert-danger alert-dismissable" *ngIf="purchaseAlreadyExists == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Purchase Already Exists</strong> the purchase info entered Already exists. Please enter a new purchase record
+				</div>	
+				<div class="alert alert-danger alert-dismissable" *ngIf="reviewAlreadyExists == true" >
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<strong>Review Already Exists</strong> the review uid/gid entered Already exists. Please enter a new review
+				</div>								
 				<div class="alert alert-danger alert-dismissable" *ngIf="numberForGameAlreadyExists == true" >
 					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
 					<strong>Achievement number already exists</strong> Achievement number for the game GID entered already exists. Please enter a different number
