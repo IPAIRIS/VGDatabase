@@ -30,7 +30,7 @@ exports.getFromGid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM purchase PC, game G, Player P WHERE PC.GID = " + req.params.gid + " AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM purchase PC, game G, player P WHERE PC.GID = " + req.params.gid + " AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -66,7 +66,7 @@ exports.getFromUid = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM purchase PC, game G, Player P WHERE PC.UID = " + req.params.uid + " AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM purchase PC, game G, player P WHERE PC.UID = " + req.params.uid + " AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -102,7 +102,7 @@ exports.getFromUsername = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM purchase PC, game G, Player P WHERE P.Username LIKE '%" + req.params.username + "%' AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM purchase PC, game G, player P WHERE P.Username LIKE '%" + req.params.username + "%' AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -138,7 +138,7 @@ exports.getFromGameTitle = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM purchase PC, game G, Player P WHERE G.Title LIKE '%" + req.params.title + "%' AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM purchase PC, game G, player P WHERE G.Title LIKE '%" + req.params.title + "%' AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
@@ -174,7 +174,7 @@ exports.getAll = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM purchase PC, game G, Player P WHERE PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM purchase PC, game G, player P WHERE PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
