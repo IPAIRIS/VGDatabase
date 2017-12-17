@@ -33,7 +33,7 @@ export class DataService {
 	}	
 
 	insertGame(game: any) {
-		return this.hClient.post('http://" + this.IP + ":" + this.PORT + "/api/games/insert', game).subscribe();
+		return this.hClient.post("http://" + this.IP + ":" + this.PORT + "/api/games/insert", game).subscribe();
 	}	
 
 	// Users
@@ -73,7 +73,7 @@ export class DataService {
 	}	
 
 	insertPlayer(player: any) {
-		return this.hClient.post('http://" + this.IP + ":" + this.PORT + "/api/players/insert', player).subscribe();
+		return this.hClient.post("http://" + this.IP + ":" + this.PORT + "/api/players/insert", player).subscribe();
 	}		
 
 	// Developers
@@ -95,7 +95,7 @@ export class DataService {
 	}		
 
 	insertDeveloper(developer: any) {
-		return this.hClient.post('http://" + this.IP + ":" + this.PORT + "/api/developers/insert', developer).subscribe();
+		return this.hClient.post("http://" + this.IP + ":" + this.PORT + "/api/developers/insert", developer).subscribe();
 	}		
 
 	// Moderators
@@ -117,7 +117,7 @@ export class DataService {
 	}	
 
 	insertModerator(moderator: any) {
-		return this.hClient.post('http://" + this.IP + ":" + this.PORT + "/api/moderators/insert', moderator).subscribe();
+		return this.hClient.post("http://" + this.IP + ":" + this.PORT + "/api/moderators/insert", moderator).subscribe();
 	}		
 
 	// Reviews
@@ -143,7 +143,7 @@ export class DataService {
 	}		
 
 	insertReview(review: any) {
-		return this.hClient.post('http://" + this.IP + ":" + this.PORT + "/api/reviews/insert', review).subscribe();
+		return this.hClient.post("http://" + this.IP + ":" + this.PORT + "/api/reviews/insert", review).subscribe();
 	}	
 
 	// Purchases
@@ -169,7 +169,7 @@ export class DataService {
 	}	
 
 	insertPurchase(purchase: any) {
-		return this.hClient.post('http://" + this.IP + ":" + this.PORT + "/api/purchases/insert', purchase).subscribe();
+		return this.hClient.post("http://" + this.IP + ":" + this.PORT + "/api/purchases/insert", purchase).subscribe();
 	}		
 
 	// Achievements
@@ -191,6 +191,6 @@ export class DataService {
 	}			
 
 	insertAchievement(achievement: any) {
-		return this.hClient.post('http://" + this.IP + ":" + this.PORT + "/api/achievements/insert', achievement).subscribe();
+		return this.hClient.post("http://" + this.IP + ":" + this.PORT + "/api/achievements/insert", achievement).subscribe();
 	}		
 }
