@@ -383,10 +383,12 @@ export class InsertComponent implements OnInit {
               if ( res.length == 0 )
               {
                 this.dataService.insertPurchase(post);
+                console.log('success');
                 this.success = true;
               } 
               else 
               {
+                console.log('no success');
                 this.purchaseAlreadyExists = true;
               }
             });

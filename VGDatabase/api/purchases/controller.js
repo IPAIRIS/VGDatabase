@@ -210,7 +210,7 @@ exports.getFromKey = function(req, res) {
 		message: null
 	};	
 
-	connect.query("SELECT * FROM purchase PC, game G, Player P WHERE PC.UID = " + req.params.uid + " AND PC.GID = " + req.params.gid + " AND PC.UID = P.UID AND PC.GID = G.GID", function(error, result, fields) {
+	connect.query("SELECT * FROM purchase P WHERE P.UID = " + req.params.uid + " AND P.GID = " + req.params.gid + "", function(error, result, fields) {
 		if (error) {
 			console.log('Error in the query');
 		} else {
