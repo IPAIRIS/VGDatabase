@@ -107,7 +107,7 @@ exports.getFromEmail = function(req, res) {
 	var query = squel.select()
         .from("developer", "D")
         .from("user","U")
-        .where("U.Email LIKE '%" + params.name.replace(/["']/g, "") + "%'")
+        .where("U.Email LIKE '%" + params.email.replace(/["']/g, "") + "%'")
         .where("D.UID = U.UID")
         .toString();	
 
@@ -124,18 +124,6 @@ exports.getFromEmail = function(req, res) {
 	});
 
 	connect.end();
-
-	connect.query("SELECT * FROM developer D, user U WHERE U.Email LIKE '" + req.params.email + "' AND D.UID = U.UID", function(error, result, fields) {
-		if (error) {
-			console.log('Error in the query');
-		} else {
-			var string = JSON.stringify(result);
-			var json = JSON.parse(string);
-			response.data = json;
-			console.log(json);
-			res.json(response);
-		}
-	});
 };
 
 exports.getAll = function(req, res) {
